@@ -133,22 +133,47 @@ class Window(QWidget):
 
     def showMetodoIntervalo(self):
         self.containerPrincipal.hide()
+        self.containerMetodoBiseccion.hide()
+        self.containerMetodoAprox.hide()
+        self.containerMetodoInterpolacion.hide()
+        self.containerMetodoNewton.hide()
+
         self.containerMetodoIntervalo.show()
 
     def showMetodoBiseccion(self):
         self.containerPrincipal.hide()
+        self.containerMetodoIntervalo.hide()
+        self.containerMetodoAprox.hide()
+        self.containerMetodoInterpolacion.hide()
+        self.containerMetodoNewton.hide()
+
         self.containerMetodoBiseccion.show()
 
     def showMetodoAprox(self):
         self.containerPrincipal.hide()
+        self.containerMetodoIntervalo.hide()
+        self.containerMetodoBiseccion.hide()
+        self.containerMetodoInterpolacion.hide()
+        self.containerMetodoNewton.hide()
+
         self.containerMetodoAprox.show()
 
     def showMetodoInterpolacion(self):
         self.containerPrincipal.hide()
+        self.containerMetodoIntervalo.hide()
+        self.containerMetodoAprox.hide()
+        self.containerMetodoBiseccion.hide()
+        self.containerMetodoNewton.hide()
+
         self.containerMetodoInterpolacion.show()
 
     def showMetodoNewton(self):
         self.containerPrincipal.hide()
+        self.containerMetodoIntervalo.hide()
+        self.containerMetodoAprox.hide()
+        self.containerMetodoBiseccion.hide()
+        self.containerMetodoInterpolacion.hide()
+
         self.containerMetodoNewton.show()
 
 
