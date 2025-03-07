@@ -10,6 +10,12 @@ class Window(QWidget):
         self.setMinimumSize(900, 600)
         self.setMaximumSize(900, 600)
 
+        layout = QGridLayout(self)
+
+        area = QTextEdit()
+
+        layout.addWidget(area)
+
 
 
 
