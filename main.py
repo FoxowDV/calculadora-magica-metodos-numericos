@@ -195,8 +195,10 @@ class Window(QWidget):
 
 if __name__ == "__main__":
     # Creando aplicacion
-    app = QApplication([])
+    app = QApplication.instance()
     #inicializando ventana
+    if app is None:
+        app = QApplication(sys.argv)
     window = Window()
     # bucle principal
     window.show()
