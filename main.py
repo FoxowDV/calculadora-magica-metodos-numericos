@@ -26,6 +26,7 @@ class Window(QWidget):
 
         title = QLabel("Calculadora magica de Metodos Númericos")
         title.setFont(QFont("Arial", 26))
+        title.setStyleSheet("color: black")
         self.containerLayout.addWidget(title)
 
 
@@ -36,6 +37,7 @@ class Window(QWidget):
 
         textouwu1 = QLabel("Metodo de intervalo")
         textouwu1.setFont(QFont("Arial", 26))
+        textouwu1.setStyleSheet("color: black")
         self.containerMetodoIntervaloLayout.addWidget(textouwu1)
 
 
@@ -46,6 +48,8 @@ class Window(QWidget):
 
         textouwu1 = QLabel("Metodo de b")
         textouwu1.setFont(QFont("Arial", 26))
+        textouwu1.setStyleSheet("color: black")
+
         self.containerMetodoBiseccionLayout.addWidget(textouwu1)
 
 
@@ -57,6 +61,7 @@ class Window(QWidget):
 
         textouwu1 = QLabel("Metodo de aprox")
         textouwu1.setFont(QFont("Arial", 26))
+        textouwu1.setStyleSheet("color: black")
         self.containerMetodoAproxLayout.addWidget(textouwu1)
 
 
@@ -68,6 +73,7 @@ class Window(QWidget):
 
         textouwu1 = QLabel("Metodo de inter")
         textouwu1.setFont(QFont("Arial", 26))
+        textouwu1.setStyleSheet("color: black")
         self.containerMetodoInterpolacionLayout.addWidget(textouwu1)
 
 
@@ -79,6 +85,7 @@ class Window(QWidget):
 
         textouwu1 = QLabel("Metodo de newton")
         textouwu1.setFont(QFont("Arial", 26))
+        textouwu1.setStyleSheet("color: black")
         self.containerMetodoNewtonLayout.addWidget(textouwu1)
 
 
@@ -98,6 +105,12 @@ class Window(QWidget):
         self.aproxSucesivasButton.setFixedHeight(buttonHeight)
         self.interpolacionLinealButton.setFixedHeight(buttonHeight)
         self.newtonRaphsonButton.setFixedHeight(buttonHeight)
+        self.intervaloButton.setStyleSheet("color: black")
+        self.biseccionButton.setStyleSheet("color: black")
+        self.aproxSucesivasButton.setStyleSheet("color: black")
+        self.aproxSucesivasButton.setStyleSheet("color: black")
+        self.interpolacionLinealButton.setStyleSheet("color: black")
+        self.newtonRaphsonButton.setStyleSheet("color: black")
 
 
         
