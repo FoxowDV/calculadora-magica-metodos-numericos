@@ -84,7 +84,7 @@ class Window(QWidget):
 
         
 
-        # Botones del menu
+        # Botones del menu uwu
         self.intervaloButton = QPushButton("Método de Intervalo")
         self.biseccionButton = QPushButton("Método de Bisección")
         self.aproxSucesivasButton = QPushButton("Método de Aproximación Sucesiva")
