@@ -1,5 +1,5 @@
 # Librerias para hacer la GUI
-import sys
+import sys, metodo_aprox
 from PySide6.QtWidgets import QApplication, QCheckBox, QGridLayout, QPushButton, QWidget, QTextEdit, QLabel, QFrame, QMenuBar
 from PySide6.QtGui import QFont, QKeyEvent
 from PySide6.QtCore import Qt
@@ -63,6 +63,8 @@ class Window(QWidget):
         textouwu1.setFont(QFont("Arial", 26))
         textouwu1.setStyleSheet("color: black")
         self.containerMetodoAproxLayout.addWidget(textouwu1)
+
+        self.containerMetodoAprox = metodo_aprox.MetodoIntervalo()
 
 
 
