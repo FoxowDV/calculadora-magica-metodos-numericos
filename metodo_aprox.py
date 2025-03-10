@@ -1,3 +1,5 @@
+from CustomWidgets import TitleLabel
+
 # Esta es una clase que sirve como herencia entre el main y el frame de nuestro metodo
 
 from PySide6.QtWidgets import QFrame, QGridLayout, QLabel, QPushButton, QLineEdit
@@ -15,11 +17,10 @@ class MetodoIntervalo(QFrame):
     self.setLayout(QGridLayout())
 
     # Fila 1: Título, centrado, copie y pegue lo del dani
-    textouwu1 = QLabel("Metodo de Aproximacion Sucesiva")
-    textouwu1.setFont(QFont("Arial", 26))
-    textouwu1.setFixedHeight(50)
-    textouwu1.setAlignment(Qt.AlignHCenter) #No se porque pero cuando lo pones como AlignCenter normal se expande el tamaño de la fila.
-    self.layout().addWidget(textouwu1, 0, 0, 1, 3) #Asignado a la fila 0, columna 0, indicamos que es solo 1 columna e indicamos que va a ocupar el espacio de 3 columnas (es importante hacerlo asi para que en las siguientes columnas no se limite a una sola columna)
+    titulo = TitleLabel("Método de Aproximación Sucesiva")
+    self.layout().addWidget(titulo, 0, 0, 1, 3)
+    #Asignado a la fila 0, columna 0, indicamos que es solo 1 columna e indicamos que va a ocupar el espacio de 3 columnas (es importante hacerlo asi para que en las siguientes columnas no se limite a una sola columna)
+    #textouwu1.setFixedHeight(50)
 
     # Fila 2: Múltiples columnas, deje este para indicarle al usuario que cosas van en cada input
     labelGx = QLabel("Ingrese la funcion igualada a x (g(x))")
