@@ -73,8 +73,8 @@ class MetodoIntervalo(QFrame):
     except ValueError: # Por si ponen texto
       print("Valor de 'inicial' no válido. Asegúrate de ingresar un número.")
     print(f"G(x): {funcion}, x_1: {inicial}") # Se muestran los valores que ingresamos en los inputs
-    # Aqui voy a poner el metodo de aproximacion cuando lo termine
-    #aprox_suc(inicial, 0.000000001, funcion)
+    # Aqui voy a poner el metodo de aproximacion cuando lo termine. EDIT: ya lo acabe
+    aprox_suc(inicial, 0.000000001, funcion)
     tabla = crear_tabla(data, self, 186) #Si no leiste lo anterior que puse, recomiendo leer el metodo en la clase tabla
     tabla.setFixedHeight(300)
     tabla.setFixedWidth(600)
@@ -96,3 +96,35 @@ data = {
     'Resultado': resultados,
     'Error': erRelPorcentuales
 }
+
+
+# Aqui esta el metodo de aproximación, da igual el metodo matematico que sea, solamente hay 3 cosas que interactuan con los arreglos que hicimos
+def fx(x, func): # El metodo que hice si es bien codigo espagueti, ¿porque uso la funcion x? no se y si no lo pongo las cosas no jalan
+  return eval(func)
+
+def aprox_suc(x, error, func):
+  it = 1
+  while True:
+    xn = fx(x, func) # Aplico mi formula
+    #Estas 4 lineas y la linea... son lo unico que interactuan con los arreglos para hacer el diccionario "data"
+    x_formateada = f"{x}" #Este es el valor actual de x que quiero que se muestre en la tabla
+    xn_formateado = f"{xn}" #Este es el valor actual del resultado de la formula de mi metodo que se va a ir mostrando en la tabla
+    x_actuales.append(x_formateada) # Agregamos este valor al arreglo de valores usados en x
+    resultados.append(xn_formateado) # Agregamos este valor al arreglo de resultados de la formula
+
+    # La evaluacion del error lo hice para que se vea bonito en mi metodo, ignorenlo si quieren
+    if xn != 0:
+      porcentaje_error = abs(xn - x) * 100
+      error_formateado = f"{porcentaje_error}%"
+
+      print(f"Iteración {it}: x = {xn}")  # Mostrar el valor de x en cada iteración es util tener cosas en la consola
+      print(f"Error: x = {porcentaje_error}")  # Mostrar el valor de x en cada iteración
+      erRelPorcentuales.append(error_formateado)
+
+      # Verificar si el error es menor que el límite
+      if abs(x - xn) < error:
+          print(f"Resultado final: {xn}")
+          break
+                
+      x = xn  # Actualizamos x
+      it += 1
