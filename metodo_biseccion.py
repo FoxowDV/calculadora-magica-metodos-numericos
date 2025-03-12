@@ -1,11 +1,10 @@
 from CustomWidgets import TitleLabel
-
 from PySide6.QtWidgets import QFrame, QGridLayout, QLabel, QPushButton, QLineEdit
 from PySide6.QtGui import QFont
 from PySide6.QtCore import Qt
-from tabla import * 
+from tabla import crear_tabla
 import math
-
+from functools import partial
 
 class MetodoBiseccion(QFrame):
 
@@ -13,81 +12,79 @@ class MetodoBiseccion(QFrame):
         super().__init__(parent)
         self.setLayout(QGridLayout())
 
-        #Creacion del titulo
-        titulo = TitleLabel("Método de Biseccion")
-        self.layout().addWidget(titulo, 0, 0, 1, 3)
+        #linea provisional
+        self.layout().setAlignment(Qt.AlignCenter)
+        
+        # Creación del título
+        titulo = TitleLabel("Método de Bisección")
+        self.layout().addWidget(titulo, 0, 0, 1, 4)
 
-        #Solicitud de los parametros requeridos para mi metodo
-        letrerofuncion = QLabel("Funcion f(x)")
-        letrerofuncion.setFont(QFont("Arial", 14))
-        letrerofuncion.setStyleSheet("color: black")
-        letrerofuncion.setFixedHeight(50)
-        letrerofuncion.setAlignment(Qt.AlignHCenter)
-        self.layout().addWidget(letrerofuncion, 1, 0, 1, 1) 
+        # Etiquetas de parámetros
+        self.agregarEtiqueta("Función f(x)", 1, 0)
+        self.agregarEtiqueta("Intervalo [a,b] (f(a) < 0 < f(b))", 1, 2)
 
-        letrerointervalo = QLabel("Intervalo [a,b] (f(a) < 0 < f(b))")
-        letrerointervalo.setFont(QFont("Arial", 14))
-        letrerointervalo.setStyleSheet("color: black")
-        letrerointervalo.setFixedHeight(50)
-        letrerointervalo.setAlignment(Qt.AlignHCenter)
-        self.layout().addWidget(letrerointervalo, 1, 2, 1, 1)
-
-        #Aqui se colocan los campos de entrada de texto
+        # Campos de entrada
         self.entradafuncion = QLineEdit(self)
-        self.entradafuncion.setStyleSheet("color: black;")
-        self.entradaintervalo = QLineEdit(self)
-        self.entradaintervalo.setStyleSheet("color: black;")
-        
-        self.layout().addWidget(self.entradafuncion, 2, 0, 1, 1)
-        self.layout().addWidget(self.entradaintervalo, 2, 2, 1, 1)
+        self.entradaintervaloa = QLineEdit(self)
+        self.entradaintervalob = QLineEdit(self)
 
-        #Añadiendo los botones para mi metodo
+        self.entradafuncion.setStyleSheet("text-align: center; color: black; background-color: grey;")
+        self.entradaintervaloa.setStyleSheet("text-align: center; color: black; background-color: grey;")
+        self.entradaintervalob.setStyleSheet("text-align: center; color: black; background-color: grey;")
+
+        self.layout().addWidget(self.entradafuncion, 2, 0, 1, 2,alignment=Qt.AlignHCenter)
+        self.layout().addWidget(self.entradaintervaloa, 2, 2, 1, 1,alignment=Qt.AlignHCenter)
+        self.layout().addWidget(self.entradaintervalob, 2, 3, 1, 1,alignment=Qt.AlignHCenter)
+
+        # Botón para calcular
         self.boton = QPushButton("Calcular", self)
-        self.boton.clicked.connect(self.calcular)
+        self.boton.clicked.connect(lambda: self.comprobacion(self.entradafuncion.text(),
+                                                             self.entradaintervaloa.text(),
+                                                             self.entradaintervalob.text()))
         self.boton.setFixedSize(100, 40)
-        self.boton.setStyleSheet("text-align: center; color: redblack; background-color: grey;")
-        self.layout().addWidget(self.boton, 3, 0, 1, 1, alignment=Qt.AlignHCenter)
+        self.boton.setStyleSheet("text-align: center; color: black; background-color: grey;")
+        self.layout().addWidget(self.boton, 4, 0, 1, 1, alignment=Qt.AlignHCenter)
 
-        self.boton = QPushButton("Calcular intervalo", self)
-        self.boton.clicked.connect(self.comprobacion())
-        self.boton.setFixedSize(100, 40)
-        self.boton.setStyleSheet("text-align: center; color: redblack; background-color: grey;")
-        self.layout().addWidget(self.boton, 3, 2, 1, 1, alignment=Qt.AlignHCenter)
-
-        #Declaracion de la tabla
-        
-
-        self.layout().setColumnStretch(4, 0)
-
+        self.layout().setColumnStretch(0, 1)
+        self.layout().setColumnStretch(1, 1)
+        self.layout().setColumnStretch(2, 1)
+        self.layout().setColumnStretch(3, 1)
+        self.layout().setColumnStretch(4, 1)
         self.hide()
 
-    #Aqui se declara lo que sucede al pulsar el boton
-    def comprobacion():
-        self.entradafuncion.text()
+    def agregarEtiqueta(self, texto, fila, columna):
+        etiqueta = QLabel(texto)
+        etiqueta.setFont(QFont("Arial", 14))
+        etiqueta.setStyleSheet("color: black")
+        etiqueta.setFixedHeight(50)
+        etiqueta.setAlignment(Qt.AlignHCenter)
+        self.layout().addWidget(etiqueta, fila, columna, 1, 1)
 
-
-    def calcular(self, intervalo_a: float, intervalo_b: float):
-
-        intervaloaux=[intervalo_a, intervalo_b]
-
-        ajusteIntervalo(intervaloaux)
-
+    def comprobacion(self, funcion, intaStr, intbStr):
         try:
-            inicial = float(inicial)
-        except ValueError: # Por si ponen texto
-            print("Valor de 'inicial' no válido. Asegúrate de ingresar un número.")
-            print(f"G(x): {funcion}, x_1: {inicial}") # Se muestran los valores que ingresamos en los inputs
-        # Aqui voy a poner el metodo de aproximacion cuando lo termine
-        #aprox_suc(inicial, 0.000000001, funcion)
 
- 
-    
-           
+            intervalo = [float(intaStr), float(intbStr)]
+            print(funcion)
+            self.calcular(intervalo, funcion)
 
-    def validarIntervalo (intervaloaux,funcion_lam):
-        
-        aproxIzq = ["3","2","1"]
-        aproxDer = ["2","4","6"]
+        except ValueError:
+
+            print(f"Error: Intervalo no válido '{intaStr}', '{intbStr}'")
+
+
+    def calcular(self, intervalo, funcion_str):
+        try:
+
+            funcion = lambda x: eval(funcion_str, {"x": x, "math": math})
+            self.validarIntervalo(intervalo, funcion)
+
+        except Exception as e:
+            print(f"Error al evaluar la función: {e}")
+
+
+    def validarIntervalo(self, intervalo, funcion):
+        aproxIzq = []
+        aproxDer = []
 
         data = {
             'Intervalo <0': aproxIzq,
@@ -95,42 +92,51 @@ class MetodoBiseccion(QFrame):
         }
 
         iteracion = 1
-
-        a = intervaloaux[0]
-        b = intervaloaux[1]
-
+        
         while True:
+            print(f"Iteración [{iteracion}]")
 
-            print("Iteracion [",iteracion,"]")
+            varIz, varDer = intervalo
 
-            c = eval(funcion_lam)
-            d = eval(funcion_lam)
-         
-            if (c-d)<(0.0000000000000001):
+            varCen = (varIz + varDer) / 2
 
-                print("RAIZ ENCONTRADA: ",a)
+            try:
+                resIz = funcion(varIz)
+                resCen = funcion(varCen)
+                resDer = funcion(varDer)
+
+            except Exception as e:
+                print(f"Error en la evaluación de la función: {e}")
+                return
+
+            if abs(resIz - resDer) <= 1e-15:
+                print(f"RAÍZ ENCONTRADA: {varCen}")
+                
                 break
 
-            elif (c * d) <= 0:
-                intervaloaux = [a,resultado]
-                print("Intervalo [",a,",",resultado,"] valido")
-                aproxDer.append(resultado)
-                aproxIzq.append(a)
-            else:
-                intervaloaux = [resultado,b]
-                print("Intervalo [",resultado,",",b,"] valido")
-                aproxDer.append(b)
-                aproxIzq.append(resultado)
+            elif resIz * resCen <= 0:
 
-            iteracion+=1
+                intervalo = [varIz, varCen]
 
-            a = intervaloaux[0]
-            b = intervaloaux[1]
-            suma = a + b
-            resultado = suma/2
-    
+                print(f"Intervalo [{varIz}, {varCen}] válido")
+                
+                aproxIzq.append(str(varIz))
+                aproxDer.append(str(varCen))
+            
+            elif resCen * resDer <= 0:
+                
+                intervalo = [varCen, varDer]
+
+                print(f"Intervalo [{varCen}, {varDer}] válido")
+                
+                aproxIzq.append(str(varCen))
+                aproxDer.append(str(varDer))
+
+            iteracion += 1
+
         tabla = crear_tabla(data, self, 186)
         tabla.setFixedHeight(300)
         tabla.setFixedWidth(600)
         tabla.setStyleSheet("color: black;")
-        self.layout().addWidget(tabla, 4, 0, 1, 3, alignment=Qt.AlignHCenter)
+        self.layout().addWidget(tabla, 5, 0, 1, 4, alignment=Qt.AlignHCenter)
+        self.agregarEtiqueta(f"RAIZ ENCONTRADA:{varCen}", 2, 0)
