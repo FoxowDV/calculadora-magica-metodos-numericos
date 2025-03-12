@@ -1,5 +1,5 @@
 # Librerias del proyecto
-import metodo_aprox
+import metodo_aprox, metodo_biseccion
 from CustomWidgets import SideBarButton
 import sys
 
@@ -75,7 +75,7 @@ class Window(QWidget):
         self.containerMetodoIntervalo = QFrame() # NOTE: Cambiar cuando creen su archivo
 
         # Metodo biseccion
-        self.containerMetodoBiseccion = QFrame() # NOTE: Cambiar cuando creen su archivo
+        self.containerMetodoBiseccion = metodo_biseccion.MetodoBiseccion() # NOTE: Cambiar cuando creen su archivo
 
         # Método aprox
         self.containerMetodoAprox = metodo_aprox.MetodoIntervalo()
@@ -155,8 +155,10 @@ class Window(QWidget):
 
 if __name__ == "__main__":
     # Creando aplicacion
-    app = QApplication([])
+    app = QApplication.instance()
     #inicializando ventana
+    if app is None:
+        app = QApplication(sys.argv)
     window = Window()
     # bucle principal
     window.show()
