@@ -36,16 +36,20 @@ class MetodoNewtonRaphson(QFrame):
         self.layout().addWidget(valueError)
 
         calcularButton = QPushButton("Calcular")
+        self.layout().addWidget(calcularButton)
+
+        funcion = lambda x: eval(valueFx.text(), {"x":x, "math": math})
+        derivadaFuncion = lambda x: eval(valuedFx.text(), {"x":x, "math": math})
         calcularButton.clicked.connect(
                 lambda: self.calcularMetodoNewtonRapson(
                     float(valueX.text()),
-                    valueFx.text(),
-                    valuedFx.text(),
+                    funcion,
+                    derivadaFuncion,
                     float(valueError.text()),
                 )
             )
-        self.layout().addWidget(calcularButton)
-
+        self.valoresDeX = []
+        self.errores = []
 
         self.hide()
 
@@ -53,8 +57,8 @@ class MetodoNewtonRaphson(QFrame):
     def calcularMetodoNewtonRapson(
             self, 
             x: float,
-            fx: str, 
-            dfx: str,
+            fx: Callable, 
+            dfx: Callable,
             error: float
             ) -> None:
         """
@@ -79,24 +83,22 @@ class MetodoNewtonRaphson(QFrame):
             xp = x
 
             # Metodo de Newton Raphson
-            x = x - (eval(fx)/eval(dfx))
+            x = x - (fx(x)/dfx(x))
 
             
             # Guardar los resultado para mostrarlos, no afecta el funcionamiento
-            self.valoresDeX = []
-            self.errores = []
-
-            self.data = {
-                "resultado": self.valoresDeX,
-                "error": self.errores
-            }
-
-            tabla = crear_tabla(self.data, self, 300)
-            self.layout().addWidget(tabla)
             self.valoresDeX.append(str(x))
             self.errores.append(str(abs(x-xp)))
 
             if (abs(x-xp) < error):
                 break
             it+=1
+
+        self.data = {
+            "resultado": self.valoresDeX,
+            "error": self.errores
+        }
+        tabla = crear_tabla(self.data, self, 300)
+        self.layout().addWidget(tabla)
+
 
