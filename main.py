@@ -1,5 +1,5 @@
 # Librerias del proyecto
-import metodo_aprox, metodo_biseccion, metodo_newton
+import metodo_aprox, metodo_biseccion, metodo_newton, metodo_falsaPosicion
 from CustomWidgets import SideBarButton
 import sys
 
@@ -81,7 +81,7 @@ class Window(QWidget):
         self.containerMetodoAprox = metodo_aprox.MetodoIntervalo()
 
         # Método interpolacion
-        self.containerMetodoInterpolacion = QFrame() # NOTE: Cambiar cuando creen su archivo
+        self.containerMetodoInterpolacion = metodo_falsaPosicion.MetodoFalsaPosicion()
 
         # Método newtonRaphson
         self.containerMetodoNewton = metodo_newton.MetodoNewtonRaphson()
@@ -138,6 +138,7 @@ class Window(QWidget):
         self.containerMetodoBiseccion.hide()
         self.containerMetodoNewton.hide()
 
+        
         self.containerMetodoInterpolacion.show()
 
     def showMetodoNewton(self):
