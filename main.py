@@ -1,5 +1,5 @@
 # Librerias del proyecto
-import metodo_aprox, metodo_biseccion
+import metodo_aprox, metodo_biseccion, metodo_newton
 from CustomWidgets import SideBarButton
 import sys
 
@@ -84,7 +84,7 @@ class Window(QWidget):
         self.containerMetodoInterpolacion = QFrame() # NOTE: Cambiar cuando creen su archivo
 
         # Método newtonRaphson
-        self.containerMetodoNewton = QFrame() # NOTE: Cambiar cuando creen su archivo
+        self.containerMetodoNewton = metodo_newton.MetodoNewtonRaphson()
 
         
         # Añadir los contenedores de los métodos al main layout

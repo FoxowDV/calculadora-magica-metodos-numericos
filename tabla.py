@@ -19,7 +19,7 @@ def crear_tabla(data, parent, ancho): # Este es el metodo que usamos en la clase
 
   # Rellenar la tabla con los datos, no se como chingados hicieron esto, ni me moleste en entender pero para mas informacion ir al siguiente link, lo saque de aqui https://github.com/snazrul1/PyRevolution/blob/master/PyQt4/Tables.ipynb
   horHeaders = []
-  for n, key in enumerate(sorted(data.keys())):
+  for n, key in enumerate(data.keys()):
     horHeaders.append(key)
     for m, item in enumerate(data[key]):
       newitem = QTableWidgetItem(item)
