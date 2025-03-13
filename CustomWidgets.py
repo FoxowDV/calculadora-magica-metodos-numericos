@@ -9,8 +9,16 @@ class SideBarButton(QtWidgets.QPushButton):
     def __init__(self, text, parent=None):
         super().__init__(parent)
         style = '''
-            color: black;
-            height: 25px;
+
+            QPushButton{
+                color: black;
+                height: 25px;
+                border:none;
+
+            }
+            QPushButton:hover {
+                background-color: yellow;
+            }
         '''
         self.setText(text)
         self.setStyleSheet(style)

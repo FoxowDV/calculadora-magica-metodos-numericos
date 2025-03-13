@@ -17,7 +17,7 @@ class MetodoBiseccion(QFrame):
         
         # Creación del título
         titulo = TitleLabel("Método de Bisección")
-        self.layout().addWidget(titulo, 0, 0, 1, 4)
+        self.layout().addWidget(titulo, 0, 1, 1, 3)
 
         # Etiquetas de parámetros
         self.agregarEtiqueta("Función f(x)", 1, 0)
