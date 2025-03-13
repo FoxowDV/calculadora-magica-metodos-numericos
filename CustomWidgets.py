@@ -39,4 +39,29 @@ class TextLabel(QtWidgets.QLabel):
         self.setStyleSheet(style)
 
 
+class Tabla(QtWidgets.QTableWidget):
+    def __init__(self, columns_labels, parent=None):
+        super().__init__(parent)
+
+        self.setColumnCount(len(columns_labels))
+        self.setHorizontalHeaderLabels(columns_labels)
+        self.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.ResizeMode.Stretch)
+
+
+    def add_row(self, row_data):
+        """
+        Añade una nueva fila a la tabla
+
+        Parametros
+        ----------
+        row_data    : Lista de valores que va a ir en la fila, tiene que ser del mismo tamaño que la cantidad de columnas
+        """
+
+        row_pos = self.rowCount()
+        self.insertRow(row_pos)
+        for column, value in enumerate(row_data):
+            self.setItem(row_pos,column, QtWidgets.QTableWidgetItem(str(value)))
+
+
+
 

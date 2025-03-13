@@ -1,4 +1,4 @@
-from CustomWidgets import TitleLabel
+from CustomWidgets import TitleLabel, Tabla
 from tabla import crear_tabla
 
 
@@ -38,8 +38,13 @@ class MetodoNewtonRaphson(QFrame):
         calcularButton = QPushButton("Calcular")
         self.layout().addWidget(calcularButton)
 
+        # Añadir la tabla con sus columnas
+        self.tablaWidget = Tabla(["Resultado", "Error"])
+        self.layout().addWidget(self.tablaWidget)
+
         funcion = lambda x: eval(valueFx.text(), {"x":x, "math": math})
         derivadaFuncion = lambda x: eval(valuedFx.text(), {"x":x, "math": math})
+
         calcularButton.clicked.connect(
                 lambda: self.calcularMetodoNewtonRapson(
                     float(valueX.text()),
@@ -48,8 +53,6 @@ class MetodoNewtonRaphson(QFrame):
                     float(valueError.text()),
                 )
             )
-        self.valoresDeX = []
-        self.errores = []
 
         self.hide()
 
@@ -77,6 +80,7 @@ class MetodoNewtonRaphson(QFrame):
         dfx     : Función que define la derivada de fx
         error   : Valor decimal que define el error 
         """
+        self.tablaWidget.setRowCount(0)
 
         it = 1
         while (True):
@@ -84,21 +88,13 @@ class MetodoNewtonRaphson(QFrame):
 
             # Metodo de Newton Raphson
             x = x - (fx(x)/dfx(x))
-
             
             # Guardar los resultado para mostrarlos, no afecta el funcionamiento
-            self.valoresDeX.append(str(x))
-            self.errores.append(str(abs(x-xp)))
+            self.tablaWidget.add_row([x, abs(x-xp)])
 
             if (abs(x-xp) < error):
                 break
             it+=1
 
-        self.data = {
-            "resultado": self.valoresDeX,
-            "error": self.errores
-        }
-        tabla = crear_tabla(self.data, self, 300)
-        self.layout().addWidget(tabla)
 
 
