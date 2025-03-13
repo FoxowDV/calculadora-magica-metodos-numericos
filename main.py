@@ -1,10 +1,12 @@
 # Librerias del proyecto
-import metodo_aprox
+import metodo_aprox, metodo_biseccion, metodo_newton
+from CustomWidgets import SideBarButton
 import sys
 
 # Librerias para hacer la GUI
 from PySide6.QtWidgets import QApplication, QGridLayout, QPushButton, QWidget, QLabel, QFrame
 from PySide6.QtGui import QFont, QKeyEvent
+from PySide6.QtCore import Qt
 
 class Window(QWidget):
     def __init__(self, parent=None):
@@ -37,23 +39,15 @@ class Window(QWidget):
 
         sideBar.setLayout(QGridLayout())
         sideBar.layout().setContentsMargins(0,0,0,0)
+        sideBar.layout().setAlignment(Qt.AlignTop)
 
         # Crear los botones del sidebar 
-        sideBarButtonStyle = '''
-            color: black;
-            height: 25px;
-        '''
-        self.intervaloButton            = QPushButton("Método de Intervalo")
-        self.biseccionButton            = QPushButton("Método de Bisección")
-        self.aproxSucesivasButton       = QPushButton("Método de Aproximación Sucesiva")
-        self.interpolacionLinealButton  = QPushButton("Método de Interpolación Lineal")
-        self.newtonRaphsonButton        = QPushButton("Método de Newton Raphson")
+        self.intervaloButton            = SideBarButton("Método de Intervalo")
+        self.biseccionButton            = SideBarButton("Método de Bisección")
+        self.aproxSucesivasButton       = SideBarButton("Método de Aproximación Sucesiva")
+        self.interpolacionLinealButton  = SideBarButton("Método de Interpolación Lineal")
+        self.newtonRaphsonButton        = SideBarButton("Método de Newton Raphson")
 
-        self.intervaloButton.setStyleSheet(sideBarButtonStyle)
-        self.biseccionButton.setStyleSheet(sideBarButtonStyle)
-        self.aproxSucesivasButton.setStyleSheet(sideBarButtonStyle)
-        self.interpolacionLinealButton.setStyleSheet(sideBarButtonStyle)
-        self.newtonRaphsonButton.setStyleSheet(sideBarButtonStyle)
 
         # Añadir los botones al sidebar
         sideBar.layout().addWidget(self.intervaloButton, 1, 0)
@@ -81,7 +75,7 @@ class Window(QWidget):
         self.containerMetodoIntervalo = QFrame() # NOTE: Cambiar cuando creen su archivo
 
         # Metodo biseccion
-        self.containerMetodoBiseccion = QFrame() # NOTE: Cambiar cuando creen su archivo
+        self.containerMetodoBiseccion = metodo_biseccion.MetodoBiseccion() # NOTE: Cambiar cuando creen su archivo
 
         # Método aprox
         self.containerMetodoAprox = metodo_aprox.MetodoIntervalo()
@@ -90,7 +84,7 @@ class Window(QWidget):
         self.containerMetodoInterpolacion = QFrame() # NOTE: Cambiar cuando creen su archivo
 
         # Método newtonRaphson
-        self.containerMetodoNewton = QFrame() # NOTE: Cambiar cuando creen su archivo
+        self.containerMetodoNewton = metodo_newton.MetodoNewtonRaphson()
 
         
         # Añadir los contenedores de los métodos al main layout
@@ -161,8 +155,10 @@ class Window(QWidget):
 
 if __name__ == "__main__":
     # Creando aplicacion
-    app = QApplication([])
+    app = QApplication.instance()
     #inicializando ventana
+    if app is None:
+        app = QApplication(sys.argv)
     window = Window()
     # bucle principal
     window.show()
