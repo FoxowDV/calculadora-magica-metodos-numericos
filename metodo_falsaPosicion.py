@@ -3,6 +3,7 @@ import math
 from PySide6.QtWidgets import QFrame, QGridLayout, QLabel, QPushButton, QLineEdit
 from PySide6.QtGui import QFont
 from PySide6.QtCore import Qt
+# -x**2+2.8*x+2.5 fokin cosa
 
 class MetodoFalsaPosicion(QFrame):
     def __init__(self, parent=None):
@@ -71,7 +72,7 @@ class MetodoFalsaPosicion(QFrame):
         self.layout().addWidget(self.etiquetaResultado, 4, 0, 1, 4)
         
         # Tabla para mostrar los resultados
-        self.tablaResultados = Tabla(["Iteración", "Aproximación", "Error f(c)", "Error Rel. %"])
+        self.tablaResultados = Tabla(["Aproximación", "Error f(c)", "Error Rel. %"])
         self.tablaResultados.setStyleSheet("color: black;") 
         self.layout().addWidget(self.tablaResultados, 5, 0, 1, 4)
         
@@ -131,7 +132,7 @@ class MetodoFalsaPosicion(QFrame):
             iteracion = 1
             c_anterior = None
             max_iteraciones = 100
-            tolerancia = 1e-6
+            tolerancia = 0.001
             
             # Iterar hasta encontrar la raíz o alcanzar el máximo de iteraciones
             while iteracion <= max_iteraciones:
@@ -151,7 +152,6 @@ class MetodoFalsaPosicion(QFrame):
                 
                 # Añadir la fila a la tabla
                 self.tablaResultados.add_row([
-                    "",
                     f"{c:.4f}", # Aproximación de la raíz con 4 decimales
                     f"{error_abs:.4f}",  # Error absoluto
                     error_rel_str # Y el error relativo porcentual

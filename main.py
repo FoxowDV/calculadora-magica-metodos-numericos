@@ -42,7 +42,7 @@ class Window(QWidget):
         sideBar.layout().setAlignment(Qt.AlignTop)
 
         # Crear los botones del sidebar 
-        self.intervaloButton            = SideBarButton("Método de Intervalo")
+        # self.intervaloButton            = SideBarButton("Método de Intervalo")
         self.biseccionButton            = SideBarButton("Método de Bisección")
         self.aproxSucesivasButton       = SideBarButton("Método de Aproximación Sucesiva")
         self.interpolacionLinealButton  = SideBarButton("Método de Interpolación Lineal")
@@ -50,11 +50,11 @@ class Window(QWidget):
 
 
         # Añadir los botones al sidebar
-        sideBar.layout().addWidget(self.intervaloButton, 1, 0)
-        sideBar.layout().addWidget(self.biseccionButton, 2, 0)
-        sideBar.layout().addWidget(self.aproxSucesivasButton, 3, 0)
-        sideBar.layout().addWidget(self.interpolacionLinealButton, 4, 0)
-        sideBar.layout().addWidget(self.newtonRaphsonButton, 5, 0)
+        #sideBar.layout().addWidget(self.intervaloButton, 1, 0)
+        sideBar.layout().addWidget(self.biseccionButton, 1, 0)
+        sideBar.layout().addWidget(self.aproxSucesivasButton, 2, 0)
+        sideBar.layout().addWidget(self.interpolacionLinealButton, 3, 0)
+        sideBar.layout().addWidget(self.newtonRaphsonButton, 4, 0)
         
         # Añadir el sidebar al layout principal
         self.layout().addWidget(sideBar, 0, 0)
@@ -72,7 +72,7 @@ class Window(QWidget):
         self.menuContainer.layout().addWidget(title)
 
         # Metodo intervalo
-        self.containerMetodoIntervalo = QFrame() # NOTE: Cambiar cuando creen su archivo
+        # self.containerMetodoIntervalo = QFrame() # NOTE: Cambiar cuando creen su archivo
 
         # Metodo biseccion
         self.containerMetodoBiseccion = metodo_biseccion.MetodoBiseccion() # NOTE: Cambiar cuando creen su archivo
@@ -89,7 +89,7 @@ class Window(QWidget):
         
         # Añadir los contenedores de los métodos al main layout
         self.layout().addWidget(self.menuContainer, 0, 1)
-        self.layout().addWidget(self.containerMetodoIntervalo, 0, 1)
+        # self.layout().addWidget(self.containerMetodoIntervalo, 0, 1)
         self.layout().addWidget(self.containerMetodoBiseccion, 0, 1)
         self.layout().addWidget(self.containerMetodoAprox, 0, 1)
         self.layout().addWidget(self.containerMetodoInterpolacion, 0, 1)
@@ -97,25 +97,25 @@ class Window(QWidget):
 
 
         # Conectar botones con sus correspondientes métodos
-        self.intervaloButton.clicked.connect(self.showMetodoIntervalo)
+        # self.intervaloButton.clicked.connect(self.showMetodoIntervalo)
         self.biseccionButton.clicked.connect(self.showMetodoBiseccion)
         self.aproxSucesivasButton.clicked.connect(self.showMetodoAprox)
         self.interpolacionLinealButton.clicked.connect(self.showMetodoInterpolacion)
         self.newtonRaphsonButton.clicked.connect(self.showMetodoNewton)
 
 
-    def showMetodoIntervalo(self):
-        self.menuContainer.hide()
-        self.containerMetodoBiseccion.hide()
-        self.containerMetodoAprox.hide()
-        self.containerMetodoInterpolacion.hide()
-        self.containerMetodoNewton.hide()
-
-        self.containerMetodoIntervalo.show()
+    # def showMetodoIntervalo(self):
+    #    self.menuContainer.hide()
+    #    self.containerMetodoBiseccion.hide()
+    #    self.containerMetodoAprox.hide()
+    #    self.containerMetodoInterpolacion.hide()
+    #    self.containerMetodoNewton.hide()
+    #
+    #    self.containerMetodoIntervalo.show()
 
     def showMetodoBiseccion(self):
         self.menuContainer.hide()
-        self.containerMetodoIntervalo.hide()
+        # self.containerMetodoIntervalo.hide()
         self.containerMetodoAprox.hide()
         self.containerMetodoInterpolacion.hide()
         self.containerMetodoNewton.hide()
@@ -124,7 +124,7 @@ class Window(QWidget):
 
     def showMetodoAprox(self):
         self.menuContainer.hide()
-        self.containerMetodoIntervalo.hide()
+    #    self.containerMetodoIntervalo.hide()
         self.containerMetodoBiseccion.hide()
         self.containerMetodoInterpolacion.hide()
         self.containerMetodoNewton.hide()
@@ -133,7 +133,7 @@ class Window(QWidget):
 
     def showMetodoInterpolacion(self):
         self.menuContainer.hide()
-        self.containerMetodoIntervalo.hide()
+    #    self.containerMetodoIntervalo.hide()
         self.containerMetodoAprox.hide()
         self.containerMetodoBiseccion.hide()
         self.containerMetodoNewton.hide()
@@ -143,7 +143,7 @@ class Window(QWidget):
 
     def showMetodoNewton(self):
         self.menuContainer.hide()
-        self.containerMetodoIntervalo.hide()
+    #    self.containerMetodoIntervalo.hide()
         self.containerMetodoAprox.hide()
         self.containerMetodoBiseccion.hide()
         self.containerMetodoInterpolacion.hide()
