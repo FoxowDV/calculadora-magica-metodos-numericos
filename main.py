@@ -45,7 +45,7 @@ class Window(QWidget):
         # self.intervaloButton            = SideBarButton("Método de Intervalo")
         self.biseccionButton            = SideBarButton("Método de Bisección")
         self.aproxSucesivasButton       = SideBarButton("Método de Aproximación Sucesiva")
-        self.interpolacionLinealButton  = SideBarButton("Método de Interpolación Lineal")
+        self.interpolacionLinealButton  = SideBarButton("Método de Falsa Posición")
         self.newtonRaphsonButton        = SideBarButton("Método de Newton Raphson")
 
 

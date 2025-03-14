@@ -36,7 +36,7 @@ class MetodoBiseccion(QFrame):
         calcularButton = QPushButton("Calcular")
         self.layout().addWidget(calcularButton)
 
-        self.tablaWidget = Tabla(["Resultado", "Error"])
+        self.tablaWidget = Tabla(["Resultado", "Limite"])
         self.layout().addWidget(self.tablaWidget)
 
         calcularButton.clicked.connect(lambda: self.comprobacion(entradafuncion.text(),
@@ -87,7 +87,7 @@ class MetodoBiseccion(QFrame):
                 print(f"Error en la evaluación de la función: {e}")
                 return
 
-            if abs(resIz - resDer) <= 1e-15:
+            if abs(resIz - resDer) <= 0.01:
                 print(f"RAÍZ ENCONTRADA: {varCen}")
                 
                 break
