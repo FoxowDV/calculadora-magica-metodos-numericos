@@ -1,4 +1,4 @@
-from CustomWidgets import TitleLabel
+from CustomWidgets import InputField, TitleLabel, TextLabel, Button
 
 # Esta es una clase que sirve como herencia entre el main y el frame de nuestro metodo
 
@@ -17,32 +17,24 @@ class MetodoIntervalo(QFrame):
     self.layout().addWidget(titulo, 0, 0, 1, 3)
 
     # Fila 2: Múltiples columnas, deje este para indicarle al usuario que cosas van en cada input
-    labelGx = QLabel("Ingrese la funcion igualada a x (g(x))")
-    labelGx.setFont(QFont("Arial", 14))
-    labelGx.setStyleSheet("color: black")
-    labelGx.setFixedHeight(50)
-    labelGx.setAlignment(Qt.AlignHCenter)
+    labelGx = TextLabel("Ingrese la funcion igualada a x (g(x))")
     self.layout().addWidget(labelGx, 1, 0, 1, 1) # Inicia en la columna 0 y ocupa 2 columnas en la fila 1
 
-    labelX = QLabel("Valor de x")
-    labelX.setFont(QFont("Arial", 14))
-    labelX.setStyleSheet("color: black")
-    labelX.setFixedHeight(50)
+    labelX = TextLabel("Valor de x")
     labelX.setAlignment(Qt.AlignHCenter)
     self.layout().addWidget(labelX, 1, 1, 1, 1) # Inicia en la columna 1 y ocupa 1 columna en la fila 1, hice un chingo de cambios hasta llegar a este resultado, no entiendo del todo como funciona el Grid layout
 
     # Creamos las cajas de texto donde se ingresaran los valores que se usaran en el metodo
-    self.input1 = QLineEdit(self)
-    self.input2 = QLineEdit(self)
+    self.input1 = InputField(self)
+    self.input2 = InputField(self)
     # Las agregamos al grid
     self.layout().addWidget(self.input1, 2, 0, 1, 2)
     self.layout().addWidget(self.input2, 2, 1, 1, 1)
 
     # Creamos el boton y lo agregamos en la fila 3, columna 0, ocupando 3 columnas
-    self.boton = QPushButton("Calcular", self)
+    self.boton = Button("Calcular", self)
     self.boton.clicked.connect(self.calcular)
     self.boton.setFixedSize(100, 40)
-    self.boton.setStyleSheet("text-align: center;")
     self.layout().addWidget(self.boton, 3, 0, 1, 3, alignment=Qt.AlignHCenter)
 
     self.tablaWidget = Tabla(["Valor actual","Resultado", "Error"])

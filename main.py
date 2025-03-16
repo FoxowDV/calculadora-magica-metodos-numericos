@@ -1,11 +1,10 @@
 # Librerias del proyecto
 import metodo_aprox, metodo_biseccion, metodo_newton, metodo_falsaPosicion
-from CustomWidgets import SideBarButton
+from CustomWidgets import SideBarButton, TitleLabel
 import sys
 
 # Librerias para hacer la GUI
-from PySide6.QtWidgets import QApplication, QGridLayout, QPushButton, QWidget, QLabel, QFrame
-from PySide6.QtGui import QFont, QKeyEvent
+from PySide6.QtWidgets import QApplication, QGridLayout, QWidget, QFrame
 from PySide6.QtCore import Qt
 
 class Window(QWidget):
@@ -14,7 +13,8 @@ class Window(QWidget):
 
         # Propieades de la ventana
         self.setFixedSize(900, 600)
-        self.setStyleSheet("background-color: #ffffff;")
+        style = "background-color: #3a3a3a;color#ffffff; border-color: #051a39"
+        self.setStyleSheet(style)
 
 
         # El frame principal está dividido en 2 Frames, el izquierdo y el derecho.
@@ -30,12 +30,7 @@ class Window(QWidget):
         # Contenedor izquierdo/sidebar
         sideBar = QFrame()
         sideBar.setFixedWidth(230)
-
-        sideBarStyle = '''
-            color: black;
-            background-color: #ebeded;
-        '''
-        sideBar.setStyleSheet(sideBarStyle)
+        sideBar.setStyleSheet(style)
 
         sideBar.setLayout(QGridLayout())
         sideBar.layout().setContentsMargins(0,0,0,0)
@@ -66,9 +61,7 @@ class Window(QWidget):
         self.menuContainer = QFrame()
         self.menuContainer.setLayout(QGridLayout())
 
-        title = QLabel("Calculadora magica de Métodos Númericos")
-        title.setFont(QFont("Arial", 26))
-        title.setStyleSheet("color: black")
+        title = TitleLabel("Calculadora magica de Métodos Númericos")
         self.menuContainer.layout().addWidget(title)
 
         # Metodo intervalo
@@ -97,25 +90,14 @@ class Window(QWidget):
 
 
         # Conectar botones con sus correspondientes métodos
-        # self.intervaloButton.clicked.connect(self.showMetodoIntervalo)
         self.biseccionButton.clicked.connect(self.showMetodoBiseccion)
         self.aproxSucesivasButton.clicked.connect(self.showMetodoAprox)
         self.interpolacionLinealButton.clicked.connect(self.showMetodoInterpolacion)
         self.newtonRaphsonButton.clicked.connect(self.showMetodoNewton)
 
 
-    # def showMetodoIntervalo(self):
-    #    self.menuContainer.hide()
-    #    self.containerMetodoBiseccion.hide()
-    #    self.containerMetodoAprox.hide()
-    #    self.containerMetodoInterpolacion.hide()
-    #    self.containerMetodoNewton.hide()
-    #
-    #    self.containerMetodoIntervalo.show()
-
     def showMetodoBiseccion(self):
         self.menuContainer.hide()
-        # self.containerMetodoIntervalo.hide()
         self.containerMetodoAprox.hide()
         self.containerMetodoInterpolacion.hide()
         self.containerMetodoNewton.hide()
@@ -124,7 +106,6 @@ class Window(QWidget):
 
     def showMetodoAprox(self):
         self.menuContainer.hide()
-    #    self.containerMetodoIntervalo.hide()
         self.containerMetodoBiseccion.hide()
         self.containerMetodoInterpolacion.hide()
         self.containerMetodoNewton.hide()
@@ -133,7 +114,6 @@ class Window(QWidget):
 
     def showMetodoInterpolacion(self):
         self.menuContainer.hide()
-    #    self.containerMetodoIntervalo.hide()
         self.containerMetodoAprox.hide()
         self.containerMetodoBiseccion.hide()
         self.containerMetodoNewton.hide()
@@ -143,7 +123,6 @@ class Window(QWidget):
 
     def showMetodoNewton(self):
         self.menuContainer.hide()
-    #    self.containerMetodoIntervalo.hide()
         self.containerMetodoAprox.hide()
         self.containerMetodoBiseccion.hide()
         self.containerMetodoInterpolacion.hide()
