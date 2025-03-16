@@ -1,4 +1,4 @@
-from CustomWidgets import TitleLabel, Tabla, TextLabel
+from CustomWidgets import Button, InputField, TitleLabel, Tabla, TextLabel
 import math
 from PySide6.QtWidgets import QFrame, QGridLayout, QLabel, QPushButton, QLineEdit
 from PySide6.QtGui import QFont
@@ -28,23 +28,9 @@ class MetodoFalsaPosicion(QFrame):
         self.layout().addWidget(labelB, 1, 3)
         
         # Creamos campos de entrada para que el usuario ingrese datos
-        self.entradaFuncion = QLineEdit(self)
-        self.entradaA = QLineEdit(self)
-        self.entradaB = QLineEdit(self)
-        
-        # Aplicamos estilo para texto negro de las letras
-        estilo = '''
-            QLineEdit {
-                background-color: #f0f0f0;
-                color: black;
-                padding: 5px;
-                border: 1px solid;
-            }
-        '''
-        # Aplicamos el estilo a cada campo de entrada
-        self.entradaFuncion.setStyleSheet(estilo)
-        self.entradaA.setStyleSheet(estilo)
-        self.entradaB.setStyleSheet(estilo)
+        self.entradaFuncion = InputField(self)
+        self.entradaA = InputField(self)
+        self.entradaB = InputField(self)
         
         # Añadimos los campos de entrada al layout en la fila 2
         self.layout().addWidget(self.entradaFuncion, 2, 0, 1, 2)
@@ -52,28 +38,15 @@ class MetodoFalsaPosicion(QFrame):
         self.layout().addWidget(self.entradaB, 2, 3)
         
         # Creamos un botón para iniciar el cálculo
-        self.botonCalcular = QPushButton("Calcular", self)
+        self.botonCalcular = Button("Calcular", self)
         self.botonCalcular.clicked.connect(self.iniciarCalculo)
         self.botonCalcular.setFixedSize(100, 40) # Tamaño del botón a 100x40 píxeles
         # Y el estilo para el botón{
-        self.botonCalcular.setStyleSheet(''' 
-                background-color: #bc42a8;
-                color: white;
-                border: none;
-                padding: 5px;
-                font-weight: bold;
-        ''') # Añadimos el botón en la fila 3, centrado horizontalmente
         self.layout().addWidget(self.botonCalcular, 3, 0, 1, 4, alignment=Qt.AlignHCenter)
         
-        # Creamos una etiqueta para mostrar el resultado final
-        self.etiquetaResultado = QLabel("El resultado va a aparecer aquí muajaja", self)
-        self.etiquetaResultado.setStyleSheet("color: black; font-weight: bold;")
-        self.etiquetaResultado.setAlignment(Qt.AlignCenter)
-        self.layout().addWidget(self.etiquetaResultado, 4, 0, 1, 4)
         
         # Tabla para mostrar los resultados
         self.tablaResultados = Tabla(["Aproximación", "Error f(c)", "Error Rel. %"])
-        self.tablaResultados.setStyleSheet("color: black;") 
         self.layout().addWidget(self.tablaResultados, 5, 0, 1, 4)
         
         # Ajustamos el tamaño de las columnas para que se distribuyan bien

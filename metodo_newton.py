@@ -1,5 +1,4 @@
-from CustomWidgets import TitleLabel, Tabla, TextLabel
-from tabla import crear_tabla
+from CustomWidgets import TitleLabel, Tabla, TextLabel, InputField, Button
 
 
 import math
@@ -20,10 +19,10 @@ class MetodoNewtonRaphson(QFrame):
         self.layout().addWidget(title)
 
         
-        valueX = QLineEdit(self)
-        valueFx= QLineEdit(self)
-        valuedFx = QLineEdit(self)
-        valueError = QLineEdit(self)
+        valueX      = InputField(self)
+        valueFx     = InputField(self)
+        valuedFx    = InputField(self)
+        valueError  = InputField(self)
 
         
         self.layout().addWidget(TextLabel("Valor de x"))
@@ -35,7 +34,7 @@ class MetodoNewtonRaphson(QFrame):
         self.layout().addWidget(TextLabel("Error minimo"))
         self.layout().addWidget(valueError)
 
-        calcularButton = QPushButton("Calcular")
+        calcularButton = Button("Calcular")
         self.layout().addWidget(calcularButton)
 
         # Añadir la tabla con sus columnas

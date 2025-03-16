@@ -1,10 +1,9 @@
-from CustomWidgets import TitleLabel, Tabla
+from CustomWidgets import Button, InputField, TextLabel, TitleLabel, Tabla
 
 import math
 from typing import Callable
  
 from PySide6.QtWidgets import QFrame, QGridLayout, QLabel, QPushButton, QLineEdit
-from PySide6.QtGui import QFont
 
 class MetodoBiseccion(QFrame):
 
@@ -17,23 +16,23 @@ class MetodoBiseccion(QFrame):
         self.layout().addWidget(titulo)
 
         # Etiquetas de parámetros
-        self.layout().addWidget(QLabel("Función f(x)"))
+        self.layout().addWidget(TextLabel("Función f(x)"))
         
 
         # Campos de entrada
-        entradafuncion = QLineEdit(self)
-        entradaintervaloa = QLineEdit(self)
-        entradaintervalob = QLineEdit(self)
+        entradafuncion      = InputField(self)
+        entradaintervaloa   = InputField(self)
+        entradaintervalob   = InputField(self)
 
         self.layout().addWidget(entradafuncion)
-        self.layout().addWidget(QLabel("Extremo izquierdo del intervalo [a, f(a) < 0 "))
+        self.layout().addWidget(TextLabel("Extremo izquierdo del intervalo [a, f(a) < 0 "))
         self.layout().addWidget(entradaintervaloa)
-        self.layout().addWidget(QLabel("Extremo derecho del intervalo ,b] 0 < f(b)"))
+        self.layout().addWidget(TextLabel("Extremo derecho del intervalo ,b] 0 < f(b)"))
         self.layout().addWidget(entradaintervalob)
 
         # Botón para calcular
 
-        calcularButton = QPushButton("Calcular")
+        calcularButton = Button("Calcular")
         self.layout().addWidget(calcularButton)
 
         self.tablaWidget = Tabla(["Resultado", "Limite"])
