@@ -2,9 +2,8 @@ from CustomWidgets import InputField, TitleLabel, TextLabel, Button
 
 # Esta es una clase que sirve como herencia entre el main y el frame de nuestro metodo
 
-from PySide6.QtWidgets import QFrame, QGridLayout, QLabel, QPushButton, QLineEdit
-from PySide6.QtGui import QFont
-from PySide6.QtCore import Qt #Esta perra mamada la tuve que sacar porque resulta que aqui estan los text-align para el Grid
+from PySide6.QtWidgets import QFrame, QGridLayout
+from PySide6.QtCore import Qt
 from CustomWidgets import TitleLabel, Tabla
 
 class MetodoIntervalo(QFrame):
@@ -22,14 +21,14 @@ class MetodoIntervalo(QFrame):
 
     labelX = TextLabel("Valor de x")
     labelX.setAlignment(Qt.AlignHCenter)
-    self.layout().addWidget(labelX, 1, 1, 1, 1) # Inicia en la columna 1 y ocupa 1 columna en la fila 1, hice un chingo de cambios hasta llegar a este resultado, no entiendo del todo como funciona el Grid layout
+    self.layout().addWidget(labelX, 1, 1, 1, 1) # Inicia en la columna 1 y ocupa 1 columna en la fila 1
 
     # Creamos las cajas de texto donde se ingresaran los valores que se usaran en el metodo
     self.input1 = InputField(self)
     self.input2 = InputField(self)
     # Las agregamos al grid
-    self.layout().addWidget(self.input1, 2, 0, 1, 2)
-    self.layout().addWidget(self.input2, 2, 1, 1, 1)
+    self.layout().addWidget(self.input1, 2, 0)
+    self.layout().addWidget(self.input2, 2, 1)
 
     # Creamos el boton y lo agregamos en la fila 3, columna 0, ocupando 3 columnas
     self.boton = Button("Calcular", self)
@@ -40,7 +39,6 @@ class MetodoIntervalo(QFrame):
     self.tablaWidget = Tabla(["Valor actual","Resultado", "Error"])
     self.layout().addWidget(self.tablaWidget, 4, 0, 1, 3)
 
-    #Ahora si esto me dejo desconcertado, aparentemente se tiene que asignarles al fakin layout que no se estiren en caso de que hayan mas elementos en la fakin fila, hijos de la verga, estuve chinge y chinge con que se podia resolver de otras formas hasta que encontre esta funcion de un pinche sitio salido de la mano de dios, aunque ps eso me pasa por no saber usar StackOverflow
     self.layout().setColumnStretch(1, 0)
     self.layout().setColumnStretch(2, 0)
 
@@ -69,6 +67,18 @@ def aprox_suc(self, x, error, func):
     if xn != 0:
       porcentaje_error = abs(xn - x) * 100
       error_formateado = f"{porcentaje_error}%"
+
+      """
+      El método de aproximación sucesiva usa una función iterativa xn+1=f(xn) 
+      para generar una secuencia de valores que convergen a la solución deseada, 
+      deteniéndose cuando la diferencia entre iteraciones es menor que un error predefinido.
+
+      Se siguen los pasos:
+      Evalúa la función func en x usando eval().
+      Devuelve el valor de la función en x.
+      Comienza con x como valor inicial.
+      Itera hasta que la diferencia entre x y xn sea menor que error
+      """
 
       print(f"Iteración {it}: x = {xn}")
       print(f"Error: x = {porcentaje_error}")
